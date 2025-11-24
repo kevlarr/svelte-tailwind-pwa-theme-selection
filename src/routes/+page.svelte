@@ -1,2 +1,2 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<p>Example app showing how to handle light, dark, and system-modes in a way that
+  supports JavaScript-disabled browsers and rendering appropriate theme on the server.</p>

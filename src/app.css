@@ -1,5 +1,19 @@
 @import 'tailwindcss';
 
+@custom-variant dark {
+  /* See https://github.com/tailwindlabs/tailwindcss/issues/19330 */
+  @media (prefers-color-scheme: dark) {
+    &:not(:is(.theme-light, .theme-light *)) {
+      @slot;
+    }
+  }
+
+  &:is(.theme-dark, .theme-dark *) {
+    @slot;
+  }
+}
+
+
 html, body {
   height: 100%;
 }
