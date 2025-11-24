@@ -14,13 +14,11 @@ export const setTheme = form(
   async ({ theme }) => {
     const { cookies, request, url } = getRequestEvent();
 
-    // `event.url` corresponds to the remote function's URL, which is
-    // basically a weird query param appened to the referrer, so we
-    // want the original URL
-    //
     // The `event.url` corresponds to the remote functions's specific URL.
     // which is basically the pathname of the page it is called from along
-    // with a query param specifying the function.
+    // with a query param specifying the function. To redirect back to
+    // the appropriate page (and maintain query parameters), we need to use
+    // the `referer` header set by Svelte as it calls the remote function.
     //
     // For example, if we are on the following page...
     //
@@ -31,12 +29,7 @@ export const setTheme = form(
     //
     //   http://localhost:5173/child?/remote=1gykboy/setTheme
     //
-    // To avoid the URL changing and losing other query params, this means
-    // that we want to redirect back to the referrer URL,
     const referrer = request.headers.get('referer') ?? '/';
-
-    console.log('remote function URL: ', url);
-    console.log('referrer URL: ', referrer);
 
     if (theme === undefined || theme === 'system') {
       cookies.delete('theme', { path: '/' });
