@@ -5,8 +5,28 @@
 
 	let { children } = $props();
 
-  const theme = (await getTheme()) ?? 'system';
-	setTheme.fields.set({ theme: theme as any });
+  const initialTheme = (await getTheme()) ?? 'system';
+
+  let theme = $state(initialTheme);
+	let wrapperCls = $derived(
+		theme === 'system'
+			? ''
+			: theme === 'dark'
+				? 'theme-dark'
+				: 'theme-light'
+	);
+
+	$inspect(theme);
+	$inspect(wrapperCls);
+
+	setTheme.fields.set({ theme: initialTheme as any });
+
+	// TODO: What is the appropriate type?
+	const enhanceFn = async ({ data, form, submit }: any) => {
+		// To reset form after submit, calll `form.reset()`
+		await submit();
+		theme = data.theme;
+	};
 </script>
 
 <svelte:head>
@@ -14,10 +34,7 @@
 </svelte:head>
 
 <div
-	class={{
-	'theme-dark': theme === 'dark',
-	'theme-light': theme === 'light',
-	}}
+	class={/* TODO: Why wasn't this working with object form here and conditional checks? */ wrapperCls}
 	style:display='contents'
 >
 	<header
@@ -36,7 +53,7 @@
 
 	<footer class="bg-neutral-200 dark:bg-neutral-700 text-black dark:text-white">
 		<div class="text-center">
-			<form class="my-4" {...setTheme}>
+			<form class="my-4" {...setTheme.enhance(enhanceFn)}>
 				<label>
 					Theme
 					<select class="border p-2" {...setTheme.fields.theme.as('select')}>
