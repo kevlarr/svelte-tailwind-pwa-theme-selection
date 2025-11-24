@@ -23,8 +23,7 @@
 
 	// TODO: What is the appropriate type?
 	const enhanceFn = async ({ data, form, submit }: any) => {
-		// To reset form after submit, calll `form.reset()`
-		await submit();
+		await submit(); // To reset form after submit, calll `form.reset()`
 		theme = data.theme;
 	};
 </script>
@@ -53,19 +52,16 @@
 
 	<footer class="bg-neutral-200 dark:bg-neutral-700 text-black dark:text-white">
 		<div class="text-center">
-			<form class="my-4" {...setTheme.enhance(enhanceFn)}>
-				<label>
-					Theme
-					<select class="border p-2" {...setTheme.fields.theme.as('select')}>
-						<option>light</option>
-						<option>dark</option>
-						<option>system</option>
-					</select>
-				</label>
+			<form class="flex gap-4 justify-center my-4" {...setTheme.enhance(enhanceFn)}>
+				<select class="border p-2" {...setTheme.fields.theme.as('select')}>
+					<option>light</option>
+					<option>dark</option>
+					<option>system</option>
+				</select>
 				{#each setTheme.fields.theme.issues() as issue (issue.message)}
 					<p class="text-red-500">{issue.message}</p>
 				{/each}
-				<button type="submit">submit</button>
+				<button class="cursor-pointer hover:bg-neutral-300 dark:hover:bg-neutral-600 px-4 py-2" type="submit">submit</button>
 			</form>
 		</div>
 	</footer>
