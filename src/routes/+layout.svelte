@@ -4,7 +4,7 @@
 	import '$src/app.css';
 
 	let { children } = $props();
-
+	const footerThemeFormId = $props.id();
   const initialTheme = (await getTheme()) ?? 'system';
 
   let theme = $state(initialTheme);
@@ -15,9 +15,6 @@
 				? 'theme-dark'
 				: 'theme-light'
 	);
-
-	$inspect(theme);
-	$inspect(wrapperCls);
 
 	setTheme.fields.set({ theme: initialTheme as any });
 
@@ -43,6 +40,7 @@
 		<nav class="flex gap-4">
 			<a href="/">home</a>
 			<a href="/child?with=params">child</a>
+			<a href="/settings">settings</a>
 		</nav>
 	</header>
 
@@ -52,7 +50,7 @@
 
 	<footer class="bg-neutral-200 dark:bg-neutral-700 text-black dark:text-white">
 		<div class="text-center">
-			<form class="flex gap-4 justify-center my-4" {...setTheme.enhance(enhanceFn)}>
+			<form class="flex gap-4 justify-center my-4" {...setTheme.for(footerThemeFormId).enhance(enhanceFn)}>
 				<select class="border p-2" {...setTheme.fields.theme.as('select')}>
 					<option>light</option>
 					<option>dark</option>

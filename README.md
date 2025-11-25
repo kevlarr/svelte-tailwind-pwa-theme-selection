@@ -4,8 +4,8 @@ This repo is a demonstration of how to support theme selection in
 JavaScript-disabled environments, allowing the user to select light,
 dark, or system-preferred theme.
 
-This utilizes a(n experimental) *remote form* (instead of form action)
-that sets a cookie, with which the server is able to appropriately assign
+This utilizes a (experimental) *remote forms* (instead of form actions)
+that set a cookie, with which the server is able to appropriately assign
 a class to force light or dark mode if not wanting to follow system preference.
 
 No event listeners are manually added and no media queries are performed manually;
