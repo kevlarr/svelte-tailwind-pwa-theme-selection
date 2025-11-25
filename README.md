@@ -4,8 +4,8 @@ This repo is a demonstration of how to support theme selection in
 JavaScript-disabled environments, allowing the user to select light,
 dark, or system-preferred theme.
 
-This utilizes a (experimental) *remote forms* (instead of form actions)
-that set a cookie, with which the server is able to appropriately assign
+This utilizes (experimental) *remote forms*, instead of form actions,
+to set a cookie with which the server is able to appropriately assign
 a class to force light or dark mode if not wanting to follow system preference.
 
 No event listeners are manually added and no media queries are performed manually;
@@ -29,3 +29,11 @@ The server can assign the `.theme-light` or `.theme-dark` class during initial r
 natively supporting JS-disabled clients, and the only extra bit necessary to get it
 working in JS-enabled clients is a single `$state` that is updated through
 the enhanced form after submit.
+
+**Note:** There are *two* ways of selecting theme in JS-enabled environments:
+
+1. The form in the `/settings` page (with a submit button)
+2. The `select` dropdown in the footer (without a submit button)
+
+That `select` element renders as disabled in JS-disabled environments, mainly because
+it uses JS to automatically submit on change to avoid having a big button next to it.
