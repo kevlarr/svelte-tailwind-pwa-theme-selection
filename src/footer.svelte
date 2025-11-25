@@ -22,8 +22,11 @@
       {...setTheme.for(footerThemeFormId).enhance(appContext.themeFormEnhance)}
     >
       <select
-        class="border p-2"
-        disabled={!browser}
+        class="border p-2 noscript:hidden"
+        disabled={
+          /* disable as a backup for older browsers where scripting media query is unsupported */
+          !browser
+        }
         {...setTheme.fields.theme.as('select')}
       >
         <option>light</option>

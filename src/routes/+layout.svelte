@@ -12,6 +12,7 @@
 </svelte:head>
 
 <AppContainer>
+	<p class="bg-amber-400 hidden noscript:block px-4 py-2 text-center">JavaScript should be enabled for the best experience; your results may vary.</p>
 	<header class="bg-neutral-200 dark:bg-neutral-700 flex items-center p-4 justify-between text-black dark:text-white">
 		<h1 class="text-2xl">theme switching test</h1>
 		<nav class="flex gap-4">
